@@ -41,7 +41,7 @@
   --skip-btn-bg: #20bfa9;
   --skip-btn-hover: #159c86;
   --border-color: transparent;
-  --option-text: #ecf0f1;
+  --option-text: #ffffff;
   --option-hover-text: #ffffff;
   --success-button-bg: #2ecc71;
 }
@@ -231,6 +231,7 @@ p {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   width: 100%;
   text-align: right;
+  font-weight: 500;
 }
 
 .option input[type="radio"] {
