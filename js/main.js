@@ -944,6 +944,7 @@ function showQuestion(index) {
   const questionContentDiv = document.getElementById('question-content'); // Target the new div
   const prevButton = document.getElementById('prevButton');
   const nextButton = document.getElementById('nextButton');
+  const holdTimerBtn = document.getElementById('holdTimerBtn'); // Get the new button
 
   // Show/hide previous button
   prevButton.style.display = index > 0 ? 'block' : 'none';
@@ -955,6 +956,9 @@ function showQuestion(index) {
   let html = `
     <div class="question">
       <h2>السؤال ${index + 1} من ${questions.length}</h2>
+      <div class="timer-container">
+        <div id="timerCircle"></div>
+      </div>
       <p>${question.text}</p>
       <div class="options">
   `;
@@ -994,6 +998,63 @@ function showQuestion(index) {
     } else {
       nextQuestion();
     }
+  };
+
+  // Timer logic
+  const timePerQuestion = 10; // 10 seconds per question
+  let timerPaused = false; // Flag to track timer pause state
+  timeLeft = timePerQuestion;
+  const timerCircle = document.getElementById('timerCircle');
+
+  function updateTimerVisual() {
+    timerCircle.textContent = timeLeft + 's';
+    const percent = (timeLeft / timePerQuestion) * 100;
+    timerCircle.style.setProperty('--time', percent);
+
+    if (timeLeft <= 5) {
+      timerCircle.classList.add('warning');
+    } else {
+      timerCircle.classList.remove('warning');
+    }
+    if (timeLeft <= 2) {
+      timerCircle.classList.add('danger');
+    } else {
+      timerCircle.classList.remove('danger');
+    }
+  }
+
+  function startCountdown() {
+    clearInterval(timer); // Clear any existing timer
+    timer = setInterval(() => {
+      timeLeft--;
+      updateTimerVisual();
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        // Automatically move to the next question if time runs out
+        if (index < questions.length - 1) {
+          nextQuestion();
+        } else {
+          showResult(); // If it's the last question, show results
+        }
+      }
+    }, 1000);
+  }
+
+  updateTimerVisual(); // Initial display
+  startCountdown(); // Start the timer initially
+
+  // Hold Timer Button functionality
+  holdTimerBtn.onclick = () => {
+    if (timerPaused) {
+      startCountdown();
+      holdTimerBtn.textContent = 'إيقاف المؤقت';
+      holdTimerBtn.style.backgroundColor = '#f39c12'; // Orange color
+    } else {
+      clearInterval(timer);
+      holdTimerBtn.textContent = 'استئناف المؤقت';
+      holdTimerBtn.style.backgroundColor = '#2ecc71'; // Green color
+    }
+    timerPaused = !timerPaused;
   };
 }
 
