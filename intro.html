@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr|AhmedHamza - معلومات المستخدم</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/intro.css">
+    <script>
+        // Check if user is logged in
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+</head>
+<body>
+    <div class="intro-container">
+        <div id="intro-section">
+            <h1 class="title">امتحان تحديد المستوى – اختبار برومتيك</h1>
+            <div class="divider"></div>
+            <h2 class="subtitle">د.أحمد حمزة</h2>
+            <h3 class="subtitle">اختصاصى العلاج النفسى</h3>
+            <h3 class="subtitle">أستاذ علم النفس المرضى</h3>
+            <h3 class="subtitle">2025</h3>
+            <div class="divider"></div>
+            <p class="instructions">
+                ضع علامة أمام الإجابة الصحيحة فى صفحة الإجابة (آخر صفحة) ولاتكتب أى علامة على ورقة الأسئلة
+            </p>
+            <button type="button" class="next-button" onclick="showForm()">ابدأ الآن</button>
+        </div>
+        
+        <div class="form-section" id="form-section">
+            <h2 class="title">بيانات الممتحن</h2>
+            <form id="userForm" onsubmit="return validateAndSubmit(event)">
+                <div class="form-group">
+                    <label for="name">الاسم:</label>
+                    <input type="text" id="name" name="name" required>
+                    <div class="error-message" id="nameError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    <div class="error-message" id="phoneError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="age">العمر:</label>
+                    <input type="number" id="age" name="age" required>
+                    <div class="error-message" id="ageError"></div>
+                </div>
+                
+                <button type="submit" class="submit-button">بدء الامتحان</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/userInfo.js"></script>
+</body>
+</html> 

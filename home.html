@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr|AhmedHamza - الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="css/common.css">
+    <script>
+        // Strict login check
+        if (!localStorage.getItem('isLoggedIn')) {
+            window.location.href = 'index.html';
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('images/Dr1.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        p {
+            font-size: 1.2em;
+            margin-bottom: 2rem;
+            color: rgb(230, 239, 236);
+        }
+        .start-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .start-button:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>مرحباً بك في امتحان الدكتور أحمد حمزة</h1>
+        <p>انقر على الزر أدناه للبدء في الامتحان</p>
+        <a href="intro.html" class="start-button">ابدأ الآن</a>
+    </div>
+</body>
+</html> 

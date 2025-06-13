@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../images/Dr1.jpeg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.intro-container {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+    color: #fff;
+}
+
+.title {
+    font-size: 2.5em;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    margin: 0.5rem 0;
+    color: #fff;
+}
+
+.divider {
+    width: 50%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 1.5rem auto;
+}
+
+.instructions {
+    font-size: 1.2em;
+    margin: 1.5rem 0;
+    color: #fff;
+    line-height: 1.6;
+}
+
+.next-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.next-button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.form-section {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.form-section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: right;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #3498db;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+    text-align: right;
+}
+
+.submit-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .intro-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .title {
+        font-size: 2em;
+    }
+
+    .subtitle {
+        font-size: 1.2em;
+    }
+
+    .instructions {
+        font-size: 1em;
+    }
+} 
