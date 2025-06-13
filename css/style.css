@@ -407,23 +407,27 @@ input:checked + .slider:after {
 
 /* Global Button Styling System */
 .btn,
-button {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    background: linear-gradient(45deg, #4CAF50, #45a049);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
-    text-align: center;
-    text-decoration: none;
-    margin: 0.5rem;
+.btn-primary {
+  background-color: #000000; /* Black background for .btn */
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover,
+.btn-primary:hover {
+  background-color: #333333; /* Darker grey on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Button Hover Effect */
@@ -450,12 +454,6 @@ button:hover::before {
 }
 
 /* Button Variants */
-.btn-primary,
-button.primary {
-    background: linear-gradient(45deg, #4CAF50, #45a049);
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-}
-
 .btn-secondary,
 button.secondary {
     background: linear-gradient(45deg, #2196F3, #1976D2);
@@ -488,12 +486,6 @@ button.large {
 }
 
 /* Button States */
-.btn:hover,
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-
 .btn:active,
 button:active {
     transform: scale(0.95);
