@@ -6,8 +6,8 @@
     <title>Dr|AhmedHamza - الصفحة الرئيسية</title>
     <link rel="stylesheet" href="css/common.css">
     <script>
-        // Strict login check
-        if (!localStorage.getItem('isLoggedIn')) {
+        // Check if we're already on the login page to prevent redirect loops
+        if (!localStorage.getItem('isLoggedIn') && !window.location.pathname.includes('index.html')) {
             window.location.href = 'index.html';
         }
     </script>
