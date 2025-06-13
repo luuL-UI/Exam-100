@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Strict login check - redirect to login if not authenticated
-    // Check if we're on the home page (regardless of repository name in path)
-    if (!localStorage.getItem('isLoggedIn') && window.location.pathname.includes('/home.html')) {
-        // Clear any existing session data
-        localStorage.clear();
-        window.location.href = 'index.html'; // Ensure redirect to login page
+    // Simple login check - only redirect if not logged in
+    if (!localStorage.getItem('isLoggedIn')) {
+        // Only redirect if we're not already on the login page
+        if (!window.location.href.includes('index.html')) {
+            window.location.href = 'index.html';
+        }
     }
 
     const loginForm = document.getElementById('loginForm');
