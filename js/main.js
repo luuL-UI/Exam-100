@@ -1052,7 +1052,7 @@ function showQuestion(index) {
     } else {
       clearInterval(timer);
       holdTimerBtn.textContent = 'استئناف المؤقت';
-      holdTimerBtn.style.backgroundColor = '#2ecc71'; // Green color
+      holdTimerBtn.style.backgroundColor = 'var(--success-button-bg)'; // Use the CSS variable
     }
     timerPaused = !timerPaused;
   };

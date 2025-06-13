@@ -11,7 +11,7 @@
   
   --button-bg: #20bfa9;
   --button-hover: #159c86;
-  --correct-bg: #2ecc71;
+  --correct-bg: #27ae60;
   --wrong-bg: #e74c3c;
   --timer-bg: #20bfa9;
   --timer-bg-light: #ecf0f1;
@@ -21,6 +21,7 @@
   --border-color: transparent;
   --option-text: #2c3e50;
   --option-hover-text: #2c3e50;
+  --success-button-bg: #27ae60;
 }
 
 [data-theme="dark"] {
@@ -32,7 +33,7 @@
   
   --button-bg: #20bfa9;
   --button-hover: #159c86;
-  --correct-bg: #18e86f;
+  --correct-bg: #2ecc71;
   --wrong-bg: #c0392b;
   --timer-bg: #20bfa9;
   --timer-bg-light: #23272f;
@@ -42,6 +43,7 @@
   --border-color: transparent;
   --option-text: #ecf0f1;
   --option-hover-text: #ffffff;
+  --success-button-bg: #2ecc71;
 }
 
 body {
