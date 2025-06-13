@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleSwitch.checked = true;
   }
 
-  // Automatically start the quiz when the page loads
-  // startQuiz(); // Removed this line
+  // Start the quiz when the page loads
+  startQuiz();
 });
 
 const questions = [
@@ -927,131 +927,81 @@ const questions = [
     correct: 0
   }
 ];
-let currentIndex = 0;
-let correctAnswers = 0;
-let timer;
-const timePerQuestion = 10;
-const container = document.getElementById("quiz-container");
 
-function showStartScreen() {
-  container.innerHTML = `
-    <p>لبدء الاختبار يرجى النقر على الزر أدناه</p>
-    <button id="startBtn" onclick="startQuiz()">ابدأ الاختبار</button>
-  `;
-  document.getElementById("startBtn").addEventListener("click", () => {
-    console.log("Start button clicked");
-    startQuiz();
-  });
-}
-
-function startQuiz() {
-  currentIndex = 0;
-  correctAnswers = 0;
-  showQuestion(currentIndex);
-}
+let currentQuestionIndex = 0;
+let userAnswers = [];
+let timer = null;
+let timeLeft = 0;
 
 function showQuestion(index) {
-  const q = questions[index];
-  let timeLeft = timePerQuestion;
-  let answered = false;
+  const question = questions[index];
+  const quizContainer = document.getElementById('quiz-container');
+  const prevButton = document.getElementById('prevButton');
+  const nextButton = document.getElementById('nextButton');
 
-  container.innerHTML = `
-    <div id="question-counter">السؤال ${index + 1} من ${questions.length}</div>
-    <div id="timerCircle" style="--time:100">${timeLeft}</div>
-    <h3>${q.text}</h3>
-    <div class="options-container">
-      ${q.options.map((opt, i) => `<div class="option" data-index="${i}">${opt}</div>`).join('')}
-    </div>
-    <div class="buttons-container">
-      <button id="prevBtn" class="prev-btn">السؤال السابق</button>
-      <button id="holdTimerBtn" class="hold-timer-btn">إيقاف المؤقت</button>
-      <button id="nextBtn" class="next-btn">السؤال التالي</button>
+  // Show/hide previous button
+  prevButton.style.display = index > 0 ? 'block' : 'none';
+
+  // Update next button text
+  nextButton.textContent = index === questions.length - 1 ? 'إنهاء' : 'السؤال التالي';
+
+  // Create question HTML
+  let html = `
+    <div class="question">
+      <h2>السؤال ${index + 1} من ${questions.length}</h2>
+      <p>${question.text}</p>
+      <div class="options">
+  `;
+
+  question.options.forEach((option, i) => {
+    const isSelected = userAnswers[index] === i;
+    html += `
+      <label class="option ${isSelected ? 'selected' : ''}">
+        <input type="radio" name="answer" value="${i}" ${isSelected ? 'checked' : ''}>
+        <span>${option}</span>
+      </label>
+    `;
+  });
+
+  html += `
+      </div>
     </div>
   `;
 
-  const options = container.querySelectorAll(".option");
-  const nextBtn = document.getElementById("nextBtn");
-  const prevBtn = document.getElementById("prevBtn");
-  const holdTimerBtn = document.getElementById("holdTimerBtn");
-  nextBtn.style.display = "inline-block";
-  prevBtn.style.display = "inline-block";
-  if (index === 0) prevBtn.disabled = true;
-  const timerCircle = document.getElementById("timerCircle");
+  quizContainer.innerHTML = html;
 
-  let timerPaused = false;
-
-  function updateTimerVisual() {
-    const percent = (timeLeft / timePerQuestion) * 100;
-    timerCircle.style.setProperty("--time", percent);
-    timerCircle.textContent = timeLeft + "s";
-  }
-
-  function finishQuestion(selected = null, isSkipped = false) {
-    answered = true;
-    clearInterval(timer);
-    options.forEach((el, i) => {
-      if (selected !== null && i === q.correct && !isSkipped) {
-        el.classList.add("correct");
-      } else if (i === selected) {
-        el.classList.add("wrong");
-      }
-      el.style.pointerEvents = "none";
-    });
-    if (selected === q.correct && !isSkipped) correctAnswers++;
-    nextBtn.style.display = "inline-block";
-  }
-
-  options.forEach(opt => {
-    opt.addEventListener("click", () => {
-      const selected = parseInt(opt.getAttribute("data-index"));
-      finishQuestion(selected, false);
+  // Add event listeners
+  const options = quizContainer.querySelectorAll('.option');
+  options.forEach(option => {
+    option.addEventListener('click', () => {
+      options.forEach(opt => opt.classList.remove('selected'));
+      option.classList.add('selected');
+      userAnswers[index] = parseInt(option.querySelector('input').value);
     });
   });
 
-  nextBtn.addEventListener("click", () => {
-    nextQuestion();
-  });
-
-  prevBtn.addEventListener("click", () => {
-    if (index > 0) {
-      currentIndex--;
-      showQuestion(currentIndex);
-    }
-  });
-
-  holdTimerBtn.addEventListener("click", () => {
-    if (timerPaused) {
-      timer = setInterval(() => {
-        timeLeft--;
-        updateTimerVisual();
-        if (timeLeft === 0 && !answered) {
-          finishQuestion(null, true);
-        }
-      }, 1000);
-      holdTimerBtn.textContent = "إيقاف المؤقت";
+  // Add event listeners for navigation buttons
+  prevButton.onclick = previousQuestion;
+  nextButton.onclick = () => {
+    if (index === questions.length - 1) {
+      showResult();
     } else {
-      clearInterval(timer);
-      holdTimerBtn.textContent = "استئناف المؤقت";
+      nextQuestion();
     }
-    timerPaused = !timerPaused;
-  });
+  };
+}
 
-  updateTimerVisual();
-  timer = setInterval(() => {
-    timeLeft--;
-    updateTimerVisual();
-    if (timeLeft === 0 && !answered) {
-      finishQuestion(null, true);
-    }
-  }, 1000);
+function previousQuestion() {
+  if (currentQuestionIndex > 0) {
+    currentQuestionIndex--;
+    showQuestion(currentQuestionIndex);
+  }
 }
 
 function nextQuestion() {
-  currentIndex++;
-  if (currentIndex < questions.length) {
-    showQuestion(currentIndex);
-  } else {
-    showResult();
+  if (currentQuestionIndex < questions.length - 1) {
+    currentQuestionIndex++;
+    showQuestion(currentQuestionIndex);
   }
 }
 
@@ -1068,7 +1018,7 @@ function showResult() {
   
   // Calculate score
   const totalQuestions = questions.length;
-  const score = Math.round((correctAnswers / totalQuestions) * 100);
+  const score = Math.round((userAnswers.filter((answer, index) => answer === questions[index].correct).length / totalQuestions) * 100);
   
   // Hide quiz container and show result container
   quizContainer.style.display = 'none';
@@ -1101,7 +1051,7 @@ function showResult() {
         <span class="score-value">${score}%</span>
       </div>
       <div class="score-details">
-        <p>الإجابات الصحيحة: ${correctAnswers} من ${totalQuestions}</p>
+        <p>الإجابات الصحيحة: ${userAnswers.filter((answer, index) => answer === questions[index].correct).length} من ${totalQuestions}</p>
         <p>النسبة المئوية: ${score}%</p>
       </div>
     </div>
@@ -1117,5 +1067,3 @@ document.querySelectorAll('button, .btn').forEach(button => {
         }, 500);
     });
 });
-
-showStartScreen();
