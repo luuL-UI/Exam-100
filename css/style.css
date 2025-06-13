@@ -234,21 +234,51 @@ p {
 }
 
 .option input[type="radio"] {
+  opacity: 0;
+  position: absolute;
+  margin-left: 0;
+}
+
+.option span {
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-color);
+  border-radius: 50%;
   margin-left: 10px;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.option.selected {
+.option input[type="radio"]:checked + span {
   background-color: #1abc9c;
-  color: white;
-  box-shadow: 0 8px 25px rgba(26, 188, 156, 0.3);
-  transform: translateY(-3px);
+  border-color: #1abc9c;
 }
 
-.option:hover {
-  background-color: var(--option-hover);
-  color: var(--option-hover-text);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+.option input[type="radio"]:checked + span::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.option:hover span {
+  border-color: var(--button-hover);
+}
+
+.option.selected span {
+  border-color: #1abc9c;
+}
+
+.option.selected span::after {
+  background-color: white;
 }
 
 .option.correct {
