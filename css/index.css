@@ -1,0 +1,74 @@
+.back-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Cairo', sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.back-button:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.user-info {
+  display: none; /* Hidden by default */
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: right;
+  font-family: 'Cairo', sans-serif;
+}
+
+.user-info p {
+  margin: 5px 0;
+  color: #2c3e50;
+  font-size: 1.1em;
+}
+
+.user-info span {
+  font-weight: bold;
+  color: #3498db;
+}
+
+.result-container {
+  display: none;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.result-container h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 1.8em;
+}
+
+.result-container .score {
+  font-size: 2em;
+  color: #3498db;
+  margin: 20px 0;
+}
+
+.result-container .user-info {
+  display: block;
+  margin: 20px 0;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+} 
