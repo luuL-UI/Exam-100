@@ -933,6 +933,12 @@ let userAnswers = [];
 let timer = null;
 let timeLeft = 0;
 
+function startQuiz() {
+  currentQuestionIndex = 0;
+  userAnswers = []; // Reset user answers when starting a new quiz
+  showQuestion(currentQuestionIndex);
+}
+
 function showQuestion(index) {
   const question = questions[index];
   const quizContainer = document.getElementById('quiz-container');
