@@ -941,7 +941,7 @@ function startQuiz() {
 
 function showQuestion(index) {
   const question = questions[index];
-  const quizContainer = document.getElementById('quiz-container');
+  const questionContentDiv = document.getElementById('question-content'); // Target the new div
   const prevButton = document.getElementById('prevButton');
   const nextButton = document.getElementById('nextButton');
 
@@ -974,10 +974,10 @@ function showQuestion(index) {
     </div>
   `;
 
-  quizContainer.innerHTML = html;
+  questionContentDiv.innerHTML = html; // Update the new div
 
   // Add event listeners
-  const options = quizContainer.querySelectorAll('.option');
+  const options = questionContentDiv.querySelectorAll('.option');
   options.forEach(option => {
     option.addEventListener('click', () => {
       options.forEach(opt => opt.classList.remove('selected'));
